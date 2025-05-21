@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "957479354422",
+    "project_id": "fir-ef46b",
+    "storage_bucket": "fir-ef46b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957479354422:android:ec5f16fb0a366b49891897",
+        "android_client_info": {
+          "package_name": "com.example.youtube"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCENYnAeUeSR9dNAcUpDmxdepyjFyolGXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
