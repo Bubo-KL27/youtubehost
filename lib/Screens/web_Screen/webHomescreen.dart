@@ -244,6 +244,12 @@ class _YoutubewebhomescreenState extends ConsumerState<Youtubewebhomescreen> {
               // Only show search and mic icons on mobile
               return Row(
                 children: [
+                  Icon(Icons.play_circle, color: Colors.red),
+                  SizedBox(width: 8),
+                  Text(
+                    "Youtube",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   IconButton(
                     icon: Icon(Icons.search),
                     onPressed: () {
