@@ -1,68 +1,38 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:youtube/Screens/web_Screen/signup_screen.dart';
 import 'package:youtube/Screens/web_Screen/webHomescreen.dart';
 
-
 class Loginform extends StatefulWidget {
- const Loginform({super.key});
+  const Loginform({super.key});
 
   @override
   State<Loginform> createState() => _LoginformState();
 }
 
 class _LoginformState extends State<Loginform> {
-  
-
-  Future<void> signInWithGoogleWeb(BuildContext context) async {
-    try {
-      // This works only on web
-      GoogleAuthProvider authProvider = GoogleAuthProvider();
-
-      await FirebaseAuth.instance.signInWithPopup(authProvider);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Login successful!"),
-          backgroundColor: Colors.green,
-        ),
-      );
-
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => Youtubewebhomescreen()),
-      );
-    } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Login failed: ${e.message}"),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
-
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-    final FirebaseAuth _auth =FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  String ? _deviceId;
-  bool? _loading =false;
+  String? _deviceId;
+  bool _loading = false;
 
   @override
   void initState() {
-     super.initState();
-      _getDeviceId();
+    super.initState();
+    _getDeviceId();
   }
 
-Future<void> _getDeviceId()async{
-  final info =DeviceInfoPlugin();
-  final webinfo = await info.webBrowserInfo;
-  setState(() {
-    _deviceId = webinfo.userAgent ?? "UNKNOWN";
-  });
-}
+  Future<void> _getDeviceId() async {
+    final info = DeviceInfoPlugin();
+    final webInfo = await info.webBrowserInfo;
+    setState(() {
+      _deviceId = webInfo.userAgent ?? "unknown_web_device";
+    });
+  }
 
   Future<void> _signIn(BuildContext context) async {
     setState(() => _loading = true);
@@ -117,45 +87,28 @@ Future<void> _getDeviceId()async{
       children: [
         TextFormField(
           controller: _emailController,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
-            labelText: "Email",
-          ),
+          decoration: InputDecoration(labelText: "Email"),
         ),
-        SizedBox(height: 16),
         TextFormField(
           controller: _passwordController,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
-            labelText: "Password",
-          ),
           obscureText: true,
+          decoration: InputDecoration(labelText: "Password"),
         ),
         SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: ()=>_signIn(context),
-          child: Text("Login"),
-        ),
-        SizedBox(height: 20),
-        Text("Or "),
-        SizedBox(height: 20),
+        _loading
+            ? CircularProgressIndicator()
+            : ElevatedButton(
+                onPressed: () => _signIn(context),
+                child: Text("Login"),
+              ),
+        SizedBox(height: 10),
         TextButton(
-          onPressed: () async {
-            Navigator.of(
-              context,
-            ).push(MaterialPageRoute(builder: (context) => SignupScreenWeb()));
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => SignupScreenWeb(),
+            ));
           },
-          child: Text("Sign In"),
-        ),
-        SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () => signInWithGoogleWeb(context),
-
-          child: Text("Google"),
+          child: Text("Don't have an account? Sign up"),
         ),
       ],
     );
