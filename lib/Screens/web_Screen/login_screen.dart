@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:youtube/Widget/fadeanimation.dart';
 import 'package:youtube/Widget/loginform.dart';
+ 
 
 class LoginScreenWeb extends StatefulWidget {
   const LoginScreenWeb({super.key});
+
+   
 
   @override
   State<LoginScreenWeb> createState() => _LoginScreenWebState();
 }
 
 class _LoginScreenWebState extends State<LoginScreenWeb> {
+
+
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -31,7 +38,7 @@ class _LoginScreenWebState extends State<LoginScreenWeb> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text("Login ", style: TextStyle(fontSize: 50)),
+                            Fadeanimation(),
                             SizedBox(height: 50),
                             Loginform(),
                           ],
@@ -52,7 +59,7 @@ class _LoginScreenWebState extends State<LoginScreenWeb> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text("Login ", style: TextStyle(fontSize: 50)),
+                           Fadeanimation(),
                           SizedBox(height: 50),
                           Loginform(),
                         ],

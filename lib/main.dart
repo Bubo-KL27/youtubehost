@@ -1,8 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:youtube/Screens/web_Screen/login_screen.dart';
 import 'package:youtube/firebase_options.dart';
-import 'package:youtube/responsive_changes.dart';
+
 
 
 
@@ -24,7 +25,7 @@ class Youtube extends StatelessWidget {
       title: "Youtube",
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: Responsivechanges(),
+      home: LoginScreenWeb(),
     );
   }
 }
